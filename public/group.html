@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!-- <html ng-app="ContactListApp" >
+    <head>
+        <title>
+            Gestión de Grupos de Investigación
+        </title>
+        
+            
+            <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            
+            <script type="text/javascript" src="contact-list-app.js"></script>
+            <script type="text/javascript" src="list-ctrl.js"></script>
+            <link rel="stylesheet" href="/stylegroup.css" type="text/css"/>
+            
+           <script>
+                function addProfesor() {
+                 var a = document.getElementById("textcomponents").value 
+                 var arrayOfStrings = document.getElementById("SelectTeacher").value.split('string:');
+                 document.getElementById("textcomponents").value = a + "\n" + arrayOfStrings[1]; 
+                }
+                
+               
+                function addLines() {
+                 var a = document.getElementById("textlines").value 
+                 var b = document.getElementById("inputlines").value
+                 document.getElementById("textlines").value = b + "\n" + a; 
+                }
+            </script>
+    
+    </head>
+<body ng-controller="ListCtrl" > 
+    <form>
+    <header>
+        <img src=img/USlogo.png alt="logo de la universidad" style="width:128px;height:110px;">
+        <h1 style="color:#B43104">Research Groups</h1> 
+        <hr><br><br>
+        <!-- Aqui inician los datos de los grupos-->
+        
+    
+    
+   
+        <div class="row">
+            <div class="col-lg-2" style="color:#B43104">
+                  <h4> Id </h4>  
+            </div>
+            <div class="col-lg-2" style="color:#B43104">  
+                 <input class="form-control" ng-model="newContact.ID" ng-value=contact.ID>
+            </div>
+            <div class="col-lg-6" style="color:#B43104">
+               
+            </div> 
+             <div class="col-lg-2" style="color:#B43104">
+                <button class="btn btn-primary btn-md"  ng-click="addContact()">Add Group</button>  <!--ng-disabled="!contactForm.$valid"-->
+            </div>  
+        </div> <br>
+        
+        <div class="row">
+            <div class="col-lg-2" style="color:#B43104">
+                  <h4> Name </h4>  
+            </div>
+            <div class="col-lg-4" style="color:#B43104">  
+                 <input class="form-control" ng-model="newContact.name" ng-value="contacto[0].name">
+            </div>
+            <div class="col-lg-4" style="color:#B43104">
+               
+            </div> 
+            <div class="col-lg-2" style="color:#B43104">
+                <button class="btn btn-primary btn-md" ng-click="refreshOne(contact.ID)">Find Group</button> <br>
+                <!-- refreshOne(contact.id), -->
+            </div>
+        </div> <br>
+        
+         <div class="row">
+            <div class="col-lg-2" style="color:#B43104">
+                 <h4>Responsable </h4> 
+            </div>
+            
+         
+            <div class="col-lg-4" style="color:#B43104">  
+                 <input class="form-control" ng-model="newContact.responsable" ng-value="contacto[0].responsable">
+            </div> 
+            
+            
+            
+            <div class="col-lg-4" style="color:#B43104"> 
+               
+            </div> 
+            <div class="col-lg-2" style="color:#B43104">
+                <button class="btn btn-primary" ng-click="UpdateContact(contact.name)">Update</button>
+            </div>
+        </div> <br>
+        
+         <div class="row">
+            <div class="col-lg-2" style="color:#B43104">
+                  <h4>E-mail </h4>
+            </div>
+            <div class="col-lg-4" style="color:#B43104">  
+                 <input class="form-control" ng-model="newContact.email" ng-value="contacto[0].email">
+            </div>
+        </div> <br>
+    
+    
+        <!-- Aqui inician los investigadores de los grupos-->
+        <section>
+            <div class="row">
+                <div class="col-lg-12">
+                   <h3 style="color:#B43104">Components:</h3> <br>
+               </div>
+           </div>
+           <div class="row">
+               
+                <div class="col-lg-2" style="color:#B43104">
+                    <h4>Select a teacher </h4>
+                </div>
+               
+              <div class="col-lg-2" class="dropdown" with:"100px">
+                
+                <select class="seleccion" id="SelectTeacher" with:"40px" ng-options="profesor for profesor in profesores" ng-model="seleccionado">
+                </select>
+                
+              </div>
+                <div class="col-lg-2" style="color:#B43104">
+                      <button class="btnshort btn-primary" onclick="addProfesor()">+</button>
+                </div>
+        </div> <br>
+        <div class="row">
+        <div class="col-lg-6" style="color:#B43104">
+               <textarea id="textcomponents" rows="20" cols="100" ng-model="newContact.components" ng-value="contacto[0].components" style="width:700px; height:300px">
+                
+                </textarea>
+            </div> <br>
+        </div>
+        </section> <br>
+        
+        <!-- Desde aqui inician las lineas de investigación -->
+        <section> 
+           <div class="row">
+               <div class="col-lg-12">
+                   <h3 style="color:#B43104">Lines of investigation:</h3> <br>
+               </div> 
+           </div>
+               <div class="row">
+               <div class="col-lg-2" style="color:#B43104">
+                </div>
+                
+               <div class="col-lg-2" class="dropdown" with:"100px">
+                   <input  class="inputline" id="inputlines">
+              </div>
+                <div class="col-lg-2">
+                      <button class="btnshort btn-primary" onclick="addLines()">+</button>
+                </div>
+        </div> <br>
+        <div class="row">
+        <div class="col-lg-6" style="color:#B43104">
+               <textarea id="textlines" rows="20" cols="100" ng-model="newContact.lineresearch" ng-value="contacto[0].lineresearch" style="width:700px; height:300px">
+                
+                </textarea>
+            </div> <br>
+        </div>
+       
+    
+        
+        
+        
+  <!--      
+        
+<form name="contactForm">
+<table class="table">
+                <thead>
+<tr> <th>Name</th> <td><input class="form-control" ng-model="newContact.name"></td> </tr>
+                    <th>&nbsp;</th>
+<tr> <th>Phone</th> <td><input ng-class="{'is-invalid': !contactForm.phone.$valid}" name="phone" class="form-control" required ng-pattern="/^[0-9]+$/" ng-model="newContact.phone"></td></tr>
+                    <th>&nbsp;</th>
+                    
+                </thead>
+                <tr>
+                    
+                    
+
+<td><button class="btn btn-danger" ng-click="delContactAll()">Delete All</button> </td>
+<td><button class="btn btn-danger" ng-click="delContact(contact.name)">Delete</button> </td>
+<td> </td>
+
+                </tr>   
+    
+                <ng-repeat="contact in contacts">
+                    <td>{{contact.name}} </td>
+                    <td>{{contact.phone}}</td>  -->
+   
+        
+<h5><a href="https://documenter.getpostman.com/view/359472/aws1718/RVnTmM8k">api documentation</a></h5>
+     </form>
+   
+    

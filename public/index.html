@@ -1,0 +1,90 @@
+<!Doctype html>
+<html ng-app="ContactListApp">
+
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--for cards-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styleindex.css">
+    
+    <meta name="google-signin-client_id" content="26501735112-ojthasfjlhimmenskgpnt3f6nimu1sdm.apps.googleusercontent.com">
+
+
+    <title>
+        RESEARCH GROUPS
+    </title>
+
+    <script>
+        function onSuccess(googleUser) {
+            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+            console.log('Logged in as: ' + googleUser.getBasicProfile().getEmail());
+            //console.log('Logged in as: ' + googleUser.getBasicProfile().getPicture());
+
+            var nombre = 'Logged in as: ' + googleUser.getBasicProfile().getName();
+            window.open("https://aws1718-03.herokuapp.com/guestview.html");
+
+        }
+
+        function onFailure(error) {
+            console.log(error);
+        }
+
+        function renderButton() {
+            gapi.signin2.render('my-signin2', {
+                'scope': 'profile email',
+                'width': 240,
+                'height': 50,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+            });
+        }
+        
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function() {
+                console.log('User signed out.');
+            });
+        }
+        
+       
+    </script>
+
+</head>
+
+<body>
+    <header class="headerindex">
+        <h1 class="header2"><b>Research Groups</b></h1>
+        <h2 class="header2"> <a href="https://investigacion.us.es" target="_blank">Viceretorate for Research</a></h2>
+        <!--<h5 align="center">Headquarters: Pabellón de Brasil, Paseo de las Delicias s/n> </h5>-->
+
+        <div class="row log">
+
+        </div>
+
+        <div class="row log">
+
+        </div>
+        <div class="row log">
+            &nbsp; &nbsp; &nbsp; <img src="https://www.informatica.us.es/docs/imagen-etsii/MarcaUS.png" alt="Logo de la universidad de Sevilla" class="loguito"> &nbsp;
+            <h6 style="color:#fff"> Office of Research, U.S. </h6>
+            &nbsp;
+            <h6 style="color:#fff"> Headquarters: Pabellón de Brasil, Paseo de las Delicias s/n. Seville</h6>
+        </div>
+
+    </header>
+
+    <div class="boton_Login" id="my-signin2" target="_self"></div>
+  
+    <a class="boton_help" href="https://documenter.getpostman.com/view/3881784/aws1718-groups/RVu2nqg8#efa93988-0106-48d0-9fa0-18f2f89fe317" target="_blank">Help</a>
+    
+    <a class="logoutindex" href="#" onclick="signOut();">Out</a>
+
+     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+     
+</body>
+
+</html>

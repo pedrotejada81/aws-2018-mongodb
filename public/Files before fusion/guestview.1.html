@@ -1,0 +1,280 @@
+<!Doctype html>
+<html ng-app="GroupListApp">
+    <head>
+        <title>
+            Research Groups
+        </title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <!--     <link rel="stylesheet" type="text/css" href="bower_components/vendors/normalize.css">-->
+     <!--   <link rel="stylesheet" type="text/css" href="bower_components/vendors/grid.css"> -->
+         <link rel="stylesheet" type="text/css" href="/style.css"> 
+        <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="group-list-app.js"></script>
+        <script type="text/javascript" src="list-ctrl.js"></script>
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- <title>www.desarrollohidrocalido.com - Diego Lira</title> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  
+<!--------------------------------------------Scripts' start---------------------------------------------------------------------------------------->
+<!--------------------------------------------Scripts' start---------------------------------------------------------------------------------------->
+ <script>
+                function addProfesor() {
+                 var a = document.getElementById("textcomponents").value 
+                 var arrayOfStrings = document.getElementById("SelectTeacher").value.split('string:');
+                 document.getElementById("textcomponents").value = a + "\n" + arrayOfStrings[1]; 
+                }
+                
+               
+                function addLines() {
+                 var a = document.getElementById("textlines").value 
+                 var b = document.getElementById("inputlines").value
+                 document.getElementById("textlines").value = b + "\n" + a; 
+                 document.getElementById("inputlines").value=null;
+                 document.getElementById("inputlines").focus();
+                }
+            </script>
+  
+<!--------------------------------------------Scripts' end---------------------------------------------------------------------------------------->
+<!--------------------------------------------Scripts' end----------------------------------------------------------------------------------------> 
+  
+    </head>
+    
+   
+    <body ng-controller="ListCtrl">
+        <title>Untitled</title> 
+
+        
+         <header>
+        <div class="row test">
+            <div class= "col-lg-6">
+              <!--  <a href="#"><img  class="logo" src="https://www.informatica.us.es/docs/imagen-etsii/logo-ETSII-US-Vertical-Negro.png"></img></a> -->
+               <a href="#"><img  class="logo" src="http://www.libreriaserviciomedico.com/files/14919"></img></a> 
+             </div>
+             
+             <div class= "col-lg-6">
+                 <nav style="float:right">
+                     <a  href="login">Sign Out</a> |  
+                     <a  href="login">Help</a> 
+                 </nav>
+             
+            
+             </div>
+        </div>
+        
+        
+    </header>
+    <Section class="form1" >
+        
+        <h2>Research Groups</h2> 
+        <br>
+        <form name="Research Groups" class="formulario">
+        
+        <table class="table table-bordered table-striped" id=tabla>
+            <thead>
+                <tr>
+                <td><label for="search">Search by:</label></td>
+                <td><input type="radio" name="gender" value="1"  id="radio1"  checked/>Group ID<br>
+                    <input type="radio" name="luis"  value="2"  id="radio2" >Group Name<br></td>
+                    
+                    
+                <td><input class="form-control" ng-model="newContact.name" placeholder="Search by name or ID"> </td>
+                <td><button class="btn btn-primary"   ng-click="getcon(newContact.name)" id="boton" >Get One </button> 
+                <input type="text" ng-model="_ID"name="1"/>
+                
+            </tr>
+            
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Responsable</th>
+                    <th>E-mail</th>
+                
+                </tr>
+            </thead>
+            
+            <tbody>
+            
+<!-- data-toggle="modal" data-target="#myModal" href="group.html"     ng-click="Item_id(contact.ID) ; getcon(contact.ID) " -->
+            <tr ng-repeat="group in groups" >
+               
+                <td><a   ng-click="Item_id(group.id) ; refreshOne() " data-toggle="modal"  href="#myModal" >{{group.id}}</a></td>
+                <td>{{group.name}}</td>
+                <td>{{group.responsable}}</td> 
+                
+                <td>{{group.email}}</td>
+                
+            </tr>
+            </tbody>
+        </table>
+        
+        
+        </form>
+        
+      <!-- Modal -->
+      <!-------------------------------------- Modal ----------------------------------------------------------------------------------------------- -->
+      <!-------------------------------------- Modal ----------------------------------------------------------------------------------------------- -->
+  <div class="container">
+  <h2>Basic Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+  <!-- Modal -->
+  <div class=" bs-example-modal-lg modal fade" id="myModal" role="dialog">
+    <div class="width1 modal-dialog"  id="modalwidth ">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Research Groups</h4>
+        </div>
+        <div class="modal-body">
+        
+        <!-- MODAL BODY--------------------------------------------------------------------------------------------------- -->
+        <!-- MODAL BODY--------------------------------------------------------------------------------------------------- -->
+        
+        <div class="row">
+            <div class="col-lg-2" style="color:#B43104">
+                  <h4> Id </h4>  
+            </div>
+            <div class="col-lg-2" style="color:#B43104">  
+                 <input class="form-control" ng-model="groups.id" > <!--ng-value="grupo[0].id" autofocus-->
+            </div>
+            <div class="col-lg-6" style="color:#B43104">
+               
+            </div> 
+             <div class="col-lg-2" style="color:#B43104">
+                <button class="btn btn-primary btn-md"  ng-click="addGroup()">Add Group</button>  <!--ng-disabled="!contactForm.$valid"-->
+            </div>  
+        </div> <br>
+        
+        <div class="row">
+            <div class="col-lg-2" style="color:#B43104">
+                  <h4> Name </h4>  
+            </div>
+            <div class="col-lg-4" style="color:#B43104">  
+                 <input class="form-control" ng-model="groups.name" /> <!--ng-value="grupo[0].name"-->
+            </div>
+            <div class="col-lg-4" style="color:#B43104">
+               
+            </div> 
+            <div class="col-lg-2" style="color:#B43104">
+                <button class="btn btn-primary btn-md" ng-click="refreshOne()">Find Group</button> <br>
+                <!-- refreshOne(contact.id), -->
+            </div>
+        </div> <br>
+        
+         <div class="row">
+            <div class="col-lg-2" style="color:#B43104">
+                 <h4>Responsable </h4> 
+            </div>
+            
+         
+            <div class="col-lg-4" style="color:#B43104">  
+                 <input class="form-control" ng-model="groups.responsable" > <!--ng-value="grupo[0].responsable"-->
+            </div> 
+            
+            
+            
+            <div class="col-lg-4" style="color:#B43104"> 
+               
+            </div> 
+            <div class="col-lg-2" style="color:#B43104">
+                <button class="btn btn-primary" ng-click="UpdateGroup(group.name)">Update</button>
+            </div>
+        </div> <br>
+        
+         <div class="row">
+            <div class="col-lg-2" style="color:#B43104">
+                  <h4>E-mail </h4>
+            </div>
+            <div class="col-lg-4" style="color:#B43104">  
+                 <input class="form-control" ng-model="groups.email" >
+            </div>
+        </div> <br>
+    
+    
+        <!-- Aqui inician los investigadores de los grupos-->
+        <section>
+            <div class="row">
+                <div class="col-lg-12">
+                   <h3 style="color:#B43104">Components:</h3> <br>
+               </div>
+           </div>
+           <div class="row">
+               
+                <div class="col-lg-2" style="color:#B43104">
+                    <h4>Select a teacher </h4>
+                </div>
+               
+              <div class="col-lg-2" class="dropdown" with:"100px">
+                
+                <select class="seleccion" id="SelectTeacher" with:"40px" ng-options="profesor for profesor in profesores">
+                </select>
+                
+              </div>
+                <div class="col-lg-2" style="color:#B43104">
+                      <button class="btnshort btn-primary" onclick="addProfesor()">+</button>
+                </div>
+        </div> <br>
+        <div class="row">
+        <div class="col-lg-6" style="color:#B43104">
+               <textarea id="textcomponents" rows="20" cols="100" ng-model="groups.components"  style="width:700px; height:300px">
+                
+                </textarea>
+            </div> <br>
+        </div>
+        </section> <br>
+        
+        <!-- Desde aqui inician las lineas de investigación -->
+        <section> 
+           <div class="row">
+               <div class="col-lg-12">
+                   <h3 style="color:#B43104">Lines of investigation:</h3> <br>
+               </div> 
+           </div>
+               <div class="row">
+               <div class="col-lg-2" style="color:#B43104">
+                </div>
+                
+               <div class="col-lg-2" class="dropdown" with:"100px">
+                   <input  class="inputline" id="inputlines">
+              </div>
+                <div class="col-lg-2">
+                      <button class="btnshort btn-primary" onclick="addLines()">+</button>
+                </div>
+        </div> <br>
+        <div class="row">
+        <div class="col-lg-6" style="color:#B43104">
+               <textarea id="textlines" rows="20" cols="100" ng-model="groups.lineresearch"  style="width:700px; height:300px">
+                
+                </textarea>
+            </div> <br>
+        </div>
+        </section> <br>
+        
+        </div><!-- BODY--------------------------------------------------------------------------------------------------------------------- -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+    <!-- Modal ------------------------------------------------------------------------------------------------ -->
+    <!-- Modal ------------------------------------------------------------------------------------------------ -->
+        </Section>
+
+    </body>
+    
+
+</html>

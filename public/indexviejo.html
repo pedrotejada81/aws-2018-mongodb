@@ -1,0 +1,41 @@
+<html > <!--ng-app="GroupListApp" -->
+    <head>
+        <title>
+            Contact List
+        </title>
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+        <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+     <!--   <script type="text/javascript" src="group-list-app.js"></script>
+        <script type="text/javascript" src="list-ctrl.js"></script> -->
+    </head>
+    <body ><!--ng-controller="ListCtrl"-->
+        <h1>Contacts</h1>
+        <form name="contactForm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td><input class="form-control" ng-model=""></td>
+                    <td><input ng-class="{'is-invalid': !contactForm.phone.$valid}" name="phone" class="form-control" required ng-pattern="/^[0-9]+$/" ng-model="newContact.phone"></td>
+                    <td><button class="btn btn-primary" ng-disabled="!contactForm.$valid"  ng-click="addGroup()">Add Contact</button> </td>
+                    <td><button class="btn btn-primary"   ng-click="delGroupAll()">Borrar todos</button> </td>
+                    <td><button class="btn btn-primary"   ng-click="delGroup(group.id)">Borrar </button> </td>
+                  <!--  <td><button class="btn btn-primary"   ng-click="UpdateGroup(group.id)">Actualizar </button> </td>
+                    <td><button class="btn btn-primary"   ng-click="refreshOne(group.id)">Get One </button> </td> -->
+                </tr>
+    
+                <tr ng-repeat="group in groups">
+                    <td>{{group.name}}</td>
+                    <td>{{group.phone}}</td>
+                </tr>
+            </table>
+        </form>
+        <h5><a href="/guestview.html">GuestView</a></h5>
+        <img src="https://infoes.examtime.com/files/2014/06/Universidad-de-Sevilla-1024x532.jpg" class="img"></img>
+    </body>
+</html>
