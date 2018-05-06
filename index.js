@@ -13,15 +13,7 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
-/*groups.add([{
- /*       name: "pepe",
-        phone: "12345",
-        email: "pepe@pepe.com"
-    }, {
-        name: "luis",
-        phone: "67890",
-        email: "luis@pepe.com" 
-    }]); */
+
 
 app.get(baseAPI + "/groups", (request, response) => {
     console.log("GET /groups"); 
@@ -115,6 +107,22 @@ app.put(baseAPI + "/groups/:id", (request, response) => {
 });
 
 
-app.listen(port, () => {
-    console.log("Server with GUI up and running!!");
+groups.connectDb((err) => {
+
+    if (err) {
+
+        console.log("Could not connect with MongoDB");
+
+        process.exit(1);
+
+    }
+
+
+
+    app.listen(port, () => {
+
+        console.log("Server with GUI up and running!!");
+
+    });    
+
 });

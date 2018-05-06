@@ -1,19 +1,34 @@
 'use strict';
 
-var path = require('path');
-var DataStore = require('nedb');
-var dbFileName = path.join(__dirname, 'groups.json');
+var MongoClient = require('mongodb').MongoClient;
 
-var db = new DataStore({
-    filename : dbFileName,
-    autoload : true
-});
+var db;
 
 
 var Groups = function () {};
 
+Groups.prototype.connectDb = function(callback) {
+
+    MongoClient.connect(process.env.MONGODB_URL, function(err, database) {
+
+        if(err) {
+
+            callback(err);
+
+        }
+
+        db = database.db('aws').collection('groups');
+
+        callback(err, db);
+
+    });
+
+};
+
+
+
 Groups.prototype.allGroups = function(callback) {
-    return db.find({}, callback);
+    return db.find({}).toArray(callback);
 };
 
 Groups.prototype.add = function(group, callback) {
@@ -25,7 +40,7 @@ Groups.prototype.removeAll = function(callback) {
 };
 
 Groups.prototype.get = function(id, callback) {
-    return db.find({id:id}, callback);
+    return db.find({id:id}).toArray(callback);
 };
 
 Groups.prototype.remove = function(id, callback) {
