@@ -30,9 +30,13 @@ angular
         
         //array para los profesores
         
-        $scope.profesores = ['Manuel Resinas | Tel: 589 63 52 41 | Email:manuel.resinas@gmail.com','Maria Escalona | Tel: 365 85 74 12 | Email:maria.escalona@gmail.com',
-        'Jose Miguel | Tel: 369 52 41 58 | Email:jose.miguel@gmail.com','Manuel Risoto | Tel: 666 66 36 58 | Email:manuel.risoto@gmail.com','Ana Ramirez | Tel: 698 99 66 45 | Email:ana.ramirez@gmail.com', 
-        'David Feliz |Tel: 589 69 58 41 | Email:david@gmail.com']
+        $scope.profesores = ["Name: Manuel Resinas  Phone:589 63 52 41  Email:manuel.resinas@gmail.com",
+                             "Name: Maria Escalona  Phone:365 85 74 12  Email:maria.escalona@gmail.com",
+                             "Name: Jose Miguel  Phone:69 52 41 58  Email:jose.miguel@gmail.com",
+                             "Name: Manuel Risoto  Phne:666 66 36 58  Email:manuel.risoto@gmail.com",
+                             "Name: Ana Ramirez  Phone:698 99 66 45  Email:ana.ramirez@gmail.com",
+                             "Name: David Feliz  Phone:589 69 58 41  Email:david@gmail.com"]
+                             
             
         $scope.seleccionado="";
         
