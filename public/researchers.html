@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        Research Groups
+        Researchers List
     </title>
     
     
@@ -86,7 +86,7 @@ function habilita()
     <header class="bigheader">
         <br>
         <br>
-        <h1 class="header"><b>Research Groups</b></h1>
+        <h1 class="header"><b>Researchers List</b></h1>
 
 
 
@@ -111,7 +111,7 @@ function habilita()
                     <div class="col-lg-4 ">
                         <div class="addbutton">
 
-                            <button type="button" ng-click="generarID() ; limpiar()" onclick="habilita()"   class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"> <span class="glyphicon glyphicon-plus"></span>  </button>
+                            <button type="button" ng-click="getresearchers()"  class="btn btn-default btn-sm"> <span class="glyphicon glyphicon-plus"></span>  </button>
                            <!--  "
                        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-off"></span> Editar</a>-->
                         <button type="button" class="btn btn-default btn-sm" ng-click="delAllGroup()"> <span class="glyphicon glyphicon-trash"></span>  </a>
@@ -126,32 +126,27 @@ function habilita()
                     
 
                     <tr>
-                        <th>ID</th>
+                        <th>ORCID</th>
                         <th>Name</th>
-                        <th>Responsable</th>
-                        <th>E-mail</th>
-                         <th>University</th>
-                        
+                        <th>Projects</th>
+                        <th>University</th>
 
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    <tr ng-if= "groups.lenght>0" ></tr> 
-                    <tr ng-repeat="group in groups |  filter:search | limitTo:15 ">
-                   
-                        <td class="center"><a ng-click="Item_id(group.id)  ; refreshOne(id)" class="tdid" data-toggle="modal" href="#myModal1" style="color:##0000ff"><b>{{group.id}}</b></a></td>
-                        <td>{{group.name}}</td>
-                        <td>{{group.responsable}}</td>
-                        <td>{{group.email}}</td>
-                        <td>{{group.university}}</td> 
+                  <!--  <tr ng-if= "groups.lenght>0" ></tr> -->
+                    <tr ng-repeat="researcher in researchers | filter:researchers2 | limitTo:10">
+                        <td>{{researchers[$index].ORCID}}</td>
+                        <td>{{researchers[$index].name}}</td>
+                        <td>{{researchers[$index].projects}}</td>
+                        <td>{{researchers[$index].university}}</td>
+                        
 
                     </tr>
                 </tbody>
             </table>
-            
-            <a href="researchers.html">Researchers List</a>
         
 
 
@@ -263,24 +258,6 @@ function habilita()
                         </div>
             
                     </div> 
-                    
-                    
-                      <div class="row form-group">
-               
-                    <div class="col-lg-2" style="color:#B43104">
-                        <br>
-                        <label for="member">University:</label>
-                
-                    </div>
-               
-                    <div class="col-lg-3 " style="color:#B43104">
-                    <br>
-                     <select class="seleccion form-control " id="SelectUniversity" ng-model="university" ng-options="university for university in universidad" ></select>
-                     
-                    </div>
-                         
-                    <br>
-                </div> <br>
                 
                     
                 </div><!--div last body id=home-->
@@ -493,24 +470,9 @@ function habilita()
                         </div>
             
                     </div> 
-                    
-                   <div class="row">
-                        <div class="col-lg-2" style="color:#B43104">
-                              <label for="university">University: </label> 
-                        </div>
-            
-                        <div class="col-lg-4" style="color:#B43104">  
-                             <input class="form-control" ng-model="groups.university" name="university" type="text" tabindex="5" required readonly> <!--ng-value="grupo[0].name"-->
-                                 <span ng-show="frm.university.$dirty && frm.university.$error.required">Field Required</span>
-                        </div>
-            
-                    </div> 
                 
                     
                 </div><!--div last body id=home-->
-                
-                
-                
                         
                         
         <div id="menu2edit" class="tab-pane fade">

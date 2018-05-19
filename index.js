@@ -10,6 +10,15 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 var LocalAPIKey = require('passport-localapikey').Strategy;
 var users = require('./users.js');
 
+var cors = require("cors");
+
+
+var researchersResource = require('./integration/Researchers.js');
+var request = require('request').defaults({json: true});
+
+var universitiesResource = require('./integration/Universities.js');
+
+
 
 var port = (process.env.PORT || 16778);
 var baseAPI = "/api/v1";
@@ -45,9 +54,40 @@ passport.use(new BasicStrategy(
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+app.use(cors());
 
 
+//Este get es para la integracion con el api de Researchers
+app.get(baseAPI + "/researchers", (req, response) => {
+    console.log("GET /researchers"); 
 
+    request.get(researchersResource("/researchers"), (error, resp, body) => {
+        if (error) {
+            console.log('error:'+error);
+            response.sendStatus(500);
+        } else {
+            response.send(body);
+        }
+    });
+});
+
+
+//Este get es para la integracion con el api de Universities
+app.get(baseAPI + "/universities", (req, response) => {
+    console.log("GET /universities"); 
+
+    request.get(universitiesResource("/universities"), (error, resp, body) => {
+        if (error) {
+            console.log('error:'+error);
+            response.sendStatus(500);
+        } else {
+            response.send(body);
+        }
+    });
+});
+
+
+//Desde aqui es para los metodos de la propia api
 app.get(baseAPI + "/groups", 
      passport.authenticate(['basic', 'localapikey'], {session:false}), 
      
@@ -59,18 +99,27 @@ app.get(baseAPI + "/groups",
     });
 });
 
-app.post(baseAPI  + "/groups/:wrong", (request, response) => {
+app.post(baseAPI  + "/groups/:wrong", 
+    passport.authenticate(['basic', 'localapikey'], {session:false}), 
+    
+    (request, response) => {
     console.log("Method Not Allowed ");
     response.sendStatus(405);    
 });
 
 
-app.put(baseAPI + "/groups", (request, response) => {
-  console.log("Method Not Allowed ");
+app.put(baseAPI + "/groups", 
+    passport.authenticate(['basic', 'localapikey'], {session:false}), 
+    
+    (request, response) => {
+    console.log("Method Not Allowed ");
     response.sendStatus(405);   
 });
 
-app.post(baseAPI + "/groups", (request, response) => {
+app.post(baseAPI + "/groups", 
+    passport.authenticate(['basic', 'localapikey'], {session:false}), 
+
+    (request, response) => {
     console.log("POST /groups");
     var group = request.body;
     groups.add(group);
@@ -84,7 +133,10 @@ app.post(baseAPI + "/groups", (request, response) => {
     }
 });
 
-app.delete(baseAPI + "/groups", (request, response) => {
+app.delete(baseAPI + "/groups", 
+    passport.authenticate(['basic', 'localapikey'], {session:false}), 
+
+    (request, response) => {
     console.log("DELETE /groups");
 
     groups.removeAll((err,numRemoved)=>{
@@ -94,7 +146,10 @@ app.delete(baseAPI + "/groups", (request, response) => {
 
 });
 
-app.get(baseAPI + "/groups/:id", (request, response) => {
+app.get(baseAPI + "/groups/:id", 
+    passport.authenticate(['basic', 'localapikey'], {session:false}), 
+    
+    (request, response) => {
     console.log("GET /groups/"+id);
     var id = request.params.id;
 
@@ -109,7 +164,10 @@ app.get(baseAPI + "/groups/:id", (request, response) => {
 });
 
 
-app.delete(baseAPI + "/groups/:id", (request, response) => {
+app.delete(baseAPI + "/groups/:id", 
+    passport.authenticate(['basic', 'localapikey'], {session:false}), 
+
+    (request, response) => {
     var id = request.params.id;
 
     groups.remove(id,(err,numRemoved)=>{
@@ -125,7 +183,10 @@ app.delete(baseAPI + "/groups/:id", (request, response) => {
 });
 
 
-app.put(baseAPI + "/groups/:id", (request, response) => {
+app.put(baseAPI + "/groups/:id", 
+    passport.authenticate(['basic', 'localapikey'], {session:false}), 
+
+    (request, response) => {
     var id = request.params.id;
     var updatedGroup = request.body;
 

@@ -28,9 +28,70 @@ angular
         }
         }  
         
+        //Llamar los Researchers
+        $scope.getresearchers = function (){
+            $http.get("/api/v1/researchers")
+            .then(function (response){
+                if(response.status==200)
+                $scope.researchers =  response.data; 
+                
+                console.log($scope.researchers);
+                $scope.contador = $scope.researchers.length;
+                
+                $scope.profesores =[];
+                
+                for (var i = 0; i < $scope.contador; i++) {
+                    $scope.profesores[i] = $scope.researchers[i].name;
+                    $scope.profesores[i] += ' | Phone '+ $scope.researchers[i].phone;
+                    $scope.profesores[i] += ' | E-mail '+ $scope.researchers[i].mail;
+                }
+                        
+                })
+                
+                .catch (function(rejection){
+                    if(rejection.status == 404)
+                        alert("Researchers list no found")
+                
+                });
+        }
+        
+        
+        //Llamar las Universities
+        $scope.getUniversities = function (){
+            $http.get("/api/v1/universities")
+            .then(function (response){
+                if(response.status==200)
+                $scope.universities =  response.data; 
+                
+                console.log($scope.universities);
+                $scope.contador = $scope.universities.length;
+                
+                $scope.universidad =[];
+                
+                for (var i = 0; i < $scope.contador; i++) {
+                    $scope.universidad[i] = $scope.universities[i].name;
+                   
+                }
+                        
+                })
+                
+                .catch (function(rejection){
+                    if(rejection.status == 404)
+                        alert("Universities list no found")
+                
+                });
+                
+                $scope.university="";
+        }
+        
+        
+        
+        
         //array para los profesores
         
-        $scope.profesores = ["Name: Manuel Resinas  Phone:589 63 52 41  Email:manuel.resinas@gmail.com",
+        //$scope.profesores = $scope.researchers[1].name;
+        
+        $scope.profesores2 = ["Name: Manuel Resinas  Phone:589 63 52 41  Email:manuel.resinas@gmail.com",
                              "Name: Maria Escalona  Phone:365 85 74 12  Email:maria.escalona@gmail.com",
                              "Name: Jose Miguel  Phone:69 52 41 58  Email:jose.miguel@gmail.com",
                              "Name: Manuel Risoto  Phne:666 66 36 58  Email:manuel.risoto@gmail.com",
@@ -108,14 +169,8 @@ angular
         }
         
        $scope.addGroup = function (){
-            //$scope.newGroup= $scope.groups;
-            //$scope.newGroup.id= $scope.id;
-           // $scope.id=$scope.newGroup.id;
             console.log($scope.newGroup)
-               //$scope.newGroup.id= $scope.generarID();
-          // $scope.newGroup.componentes=$scope.componentes;
-           //$scope.newGroup.lineresearch=$scope.lines;
-           $scope.newGroup={name:$scope.groups.name, id:$scope.id, responsable:$scope.groups.responsable, email:$scope.groups.email, componentes:$scope.componentes, lineresearch:$scope.lines};
+           $scope.newGroup={name:$scope.groups.name, id:$scope.id, responsable:$scope.groups.responsable, email:$scope.groups.email, componentes:$scope.componentes, lineresearch:$scope.lines, university:$scope.university};
            console.log($scope.groups)
             $http
                 .post("/api/v1/groups", $scope.newGroup)
@@ -150,18 +205,7 @@ angular
         
         
        $scope.delAllGroup = function (ev){
-         /* //  $mdDialog.show(
-              //  $mdDialog.alert()
-                //.parent(angular.element(documento.querySelector('#poputContainer')))
-                .clickOutsideToClose(true)
-                .title('Thi is an alert title')
-                .textContent('You can specific')
-                .arialLabel('Alert Dialog Demo')
-                .ok('Got it')
-                .targetEvent(ev)
-                )
-            
-            */
+         
             $http
                 .delete("/api/v1/groups", $scope.delAllGroup)
                 .then(function (){
@@ -213,15 +257,13 @@ angular
                     if(rejection.status == 503)
                         alert("Service not available");
                     
-                    
-                    
-                    
-                    
                 });
         
         }
         
         
+        $scope.getresearchers();
+        $scope.getUniversities();
         refresh();
         
         
