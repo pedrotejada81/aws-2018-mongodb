@@ -23,6 +23,7 @@
     "passport": "^0.4.0",
     "passport-http": "^0.3.0",
     "passport-localapikey": "0.0.3",
+    "request": "^2.87.0",
     "url-join": "^4.0.0"
   },
   "devDependencies": {
